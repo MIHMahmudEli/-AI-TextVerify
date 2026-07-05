@@ -4,11 +4,11 @@
 
 /* ---------- vintage classic white ---------- */
 :root {
-  --paper: #f3edde;
-  --panel: #faf6ea;
+  --paper: #f2ecdc;
+  --panel: #f9f5e8;
   --ink: #2b241a;
   --ink-soft: #6f6249;
-  --line: #d8cbaa;
+  --line: #d5c8a5;
   --accent: #8c6a2f;
   --accent-strong: #6b4e1c;
   --ai: #8e3325;
@@ -16,12 +16,13 @@
   --btn: #3a2f20;
   --btn-hover: #241c11;
   --btn-text: #f6f0dd;
+  --rule-ink: rgb(140 106 47 / 0.16);
 }
 
 /* ---------- vintage classic black ---------- */
 .dark {
   --paper: #12100e;
-  --panel: #1c1815;
+  --panel: #1b1714;
   --ink: #eae1ca;
   --ink-soft: #a2937a;
   --line: #3d352a;
@@ -32,6 +33,7 @@
   --btn: #c9a24b;
   --btn-hover: #e2bd66;
   --btn-text: #171310;
+  --rule-ink: rgb(201 162 75 / 0.14);
 }
 
 @theme inline {
@@ -60,11 +62,11 @@ html.dark {
 
 body {
   background-color: var(--paper);
-  background-image: radial-gradient(
-    ellipse at 50% -10%,
-    rgb(140 106 47 / 0.08),
-    transparent 60%
-  );
+  /* aged-paper wash: warm vignette + faint mottling */
+  background-image:
+    radial-gradient(ellipse at 50% -10%, rgb(140 106 47 / 0.10), transparent 55%),
+    radial-gradient(ellipse at 15% 110%, rgb(140 106 47 / 0.06), transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgb(140 106 47 / 0.05), transparent 45%);
   color: var(--ink);
   font-family: var(--font-garamond), Georgia, "Times New Roman", serif;
   transition: background-color 0.25s ease, color 0.25s ease;
@@ -73,4 +75,109 @@ body {
 ::selection {
   background: var(--accent);
   color: var(--paper);
+}
+
+/* ---------- certificate frame around the whole page ---------- */
+.certificate {
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  padding: 5px;
+}
+.certificate-inner {
+  border: 1px solid var(--line);
+}
+
+/* ---------- ruled manuscript textarea ---------- */
+.manuscript {
+  line-height: 2rem;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(2rem - 1px),
+    var(--rule-ink) calc(2rem - 1px),
+    var(--rule-ink) 2rem
+  );
+  background-attachment: local;
+  background-origin: content-box;
+}
+
+/* ---------- rubber-stamp verdict ---------- */
+.stamp {
+  display: inline-block;
+  transform: rotate(-2.5deg);
+  border: 3px double currentColor;
+  border-radius: 6px;
+  padding: 0.55rem 1.6rem;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.92;
+}
+
+/* ---------- ticked gauge ---------- */
+.gauge {
+  position: relative;
+  height: 16px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  overflow: hidden;
+}
+.gauge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gauge-ticks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(10% - 1px),
+    color-mix(in srgb, var(--ink-soft) 45%, transparent) calc(10% - 1px),
+    color-mix(in srgb, var(--ink-soft) 45%, transparent) 10%
+  );
+  background-size: calc(100% + 1px) 45%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+/* ---------- reveal animation for the verdict ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.45s ease-out both;
+}
+
+/* ---------- deliberating ellipsis ---------- */
+@keyframes ellipsis {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+}
+.deliberating::after {
+  display: inline-block;
+  width: 1.2em;
+  text-align: left;
+  content: "";
+  animation: ellipsis 1.4s steps(1) infinite;
 }
