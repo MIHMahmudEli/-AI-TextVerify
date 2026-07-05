@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- vintage classic white ---------- */
+:root {
+  --paper: #f3edde;
+  --panel: #faf6ea;
+  --ink: #2b241a;
+  --ink-soft: #6f6249;
+  --line: #d8cbaa;
+  --accent: #8c6a2f;
+  --accent-strong: #6b4e1c;
+  --ai: #8e3325;
+  --human: #3f5a36;
+  --btn: #3a2f20;
+  --btn-hover: #241c11;
+  --btn-text: #f6f0dd;
+}
+
+/* ---------- vintage classic black ---------- */
+.dark {
+  --paper: #12100e;
+  --panel: #1c1815;
+  --ink: #eae1ca;
+  --ink-soft: #a2937a;
+  --line: #3d352a;
+  --accent: #c9a24b;
+  --accent-strong: #e2bd66;
+  --ai: #d97f63;
+  --human: #9dbb8a;
+  --btn: #c9a24b;
+  --btn-hover: #e2bd66;
+  --btn-text: #171310;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-ai: var(--ai);
+  --color-human: var(--human);
+  --color-btn: var(--btn);
+  --color-btn-hover: var(--btn-hover);
+  --color-btn-text: var(--btn-text);
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-garamond), Georgia, "Times New Roman", serif;
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--paper);
+  background-image: radial-gradient(
+    ellipse at 50% -10%,
+    rgb(140 106 47 / 0.08),
+    transparent 60%
+  );
+  color: var(--ink);
+  font-family: var(--font-garamond), Georgia, "Times New Roman", serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
