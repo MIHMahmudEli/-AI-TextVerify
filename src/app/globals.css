@@ -11,8 +11,9 @@
   --line: #d5c8a5;
   --accent: #8c6a2f;
   --accent-strong: #6b4e1c;
-  --ai: #8e3325;
-  --human: #3f5a36;
+  /* polarity inks — CVD-validated pair (prussian blue vs oxblood) */
+  --ai: #a03a24;
+  --human: #2e6ba3;
   --btn: #3a2f20;
   --btn-hover: #241c11;
   --btn-text: #f6f0dd;
@@ -28,8 +29,8 @@
   --line: #3d352a;
   --accent: #c9a24b;
   --accent-strong: #e2bd66;
-  --ai: #d97f63;
-  --human: #9dbb8a;
+  --ai: #c65a33;
+  --human: #4f8ac4;
   --btn: #c9a24b;
   --btn-hover: #e2bd66;
   --btn-text: #171310;
@@ -62,11 +63,9 @@ html.dark {
 
 body {
   background-color: var(--paper);
-  /* aged-paper wash: warm vignette + faint mottling */
   background-image:
     radial-gradient(ellipse at 50% -10%, rgb(140 106 47 / 0.10), transparent 55%),
-    radial-gradient(ellipse at 15% 110%, rgb(140 106 47 / 0.06), transparent 50%),
-    radial-gradient(ellipse at 90% 80%, rgb(140 106 47 / 0.05), transparent 45%);
+    radial-gradient(ellipse at 15% 110%, rgb(140 106 47 / 0.06), transparent 50%);
   color: var(--ink);
   font-family: var(--font-garamond), Georgia, "Times New Roman", serif;
   transition: background-color 0.25s ease, color 0.25s ease;
@@ -77,13 +76,18 @@ body {
   color: var(--paper);
 }
 
-/* ---------- certificate frame around the whole page ---------- */
-.certificate {
-  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
-  padding: 5px;
+/* ---------- newspaper rules ---------- */
+.rule-double {
+  border-top: 3px solid var(--ink);
+  position: relative;
 }
-.certificate-inner {
-  border: 1px solid var(--line);
+.rule-double::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2px;
+  border-top: 1px solid var(--ink);
 }
 
 /* ---------- ruled manuscript textarea ---------- */
@@ -100,55 +104,16 @@ body {
   background-origin: content-box;
 }
 
-/* ---------- rubber-stamp verdict ---------- */
-.stamp {
-  display: inline-block;
-  transform: rotate(-2.5deg);
-  border: 3px double currentColor;
-  border-radius: 6px;
-  padding: 0.55rem 1.6rem;
-  font-family: var(--font-playfair), Georgia, serif;
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  opacity: 0.92;
+/* ---------- gauge needle ---------- */
+.needle {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ---------- ticked gauge ---------- */
-.gauge {
-  position: relative;
-  height: 16px;
-  border: 1px solid var(--line);
-  background: var(--paper);
-  overflow: hidden;
-}
-.gauge-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
-  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.gauge-ticks {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to right,
-    transparent 0,
-    transparent calc(10% - 1px),
-    color-mix(in srgb, var(--ink-soft) 45%, transparent) calc(10% - 1px),
-    color-mix(in srgb, var(--ink-soft) 45%, transparent) 10%
-  );
-  background-size: calc(100% + 1px) 45%;
-  background-position: bottom;
-  background-repeat: no-repeat;
-}
-
-/* ---------- reveal animation for the verdict ---------- */
+/* ---------- reveal animation ---------- */
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;

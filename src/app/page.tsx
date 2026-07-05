@@ -15,108 +15,92 @@ const FEATURES = [
   {
     numeral: "III",
     title: "Calibrated",
-    body: "The reported probability is temperature-calibrated: 90% means nine passages out of ten with that score are AI-written.",
+    body: "The probability is temperature-calibrated: a 90% score means nine passages out of ten with that score are AI-written.",
   },
 ];
 
 export default function Home() {
   return (
-    <div className="certificate m-3 flex grow flex-col sm:m-5">
-      <div className="certificate-inner flex grow flex-col">
-        <div className="mx-auto flex w-full max-w-4xl grow flex-col px-5 sm:px-10">
-          {/* top bar */}
-          <header className="flex items-center justify-between border-b border-line py-5">
-            <div className="flex items-center gap-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/seal.svg" alt="PIRD seal" className="h-9 w-9" />
-              <div>
-                <div className="font-[family-name:var(--font-display)] text-base font-semibold tracking-[0.14em]">
-                  PIRD
-                </div>
-                <div className="text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
-                  Textual Verification
-                </div>
-              </div>
-            </div>
-            <ThemeToggle />
-          </header>
-
-          {/* masthead */}
-          <section className="pb-12 pt-14 text-center sm:pt-16">
-            <p className="text-[0.7rem] uppercase tracking-[0.4em] text-ink-soft">
-              Paraphrase-Robust · Cross-Domain · Calibrated
-            </p>
-            <h1 className="mt-4 font-[family-name:var(--font-display)] text-[4.2rem] font-semibold leading-none tracking-[0.16em] sm:text-[5.5rem]">
-              <span className="pl-[0.16em]">PIRD</span>
-            </h1>
-            <div className="mx-auto mt-6 flex max-w-sm items-center gap-4 text-accent">
-              <span className="h-px grow bg-line" />
-              <span aria-hidden className="text-lg">
-                ❦
-              </span>
-              <span className="h-px grow bg-line" />
-            </div>
-            <p className="mx-auto mt-6 max-w-xl text-[1.15rem] italic leading-relaxed text-ink-soft">
-              Determine whether a passage was written by human hand or by
-              machine. Submit at least twenty words and receive a calibrated
-              verdict, robust to paraphrase and disguise.
-            </p>
-          </section>
-
-          {/* analyzer */}
-          <main className="grow">
-            <Analyzer />
-
-            {/* method, in three articles */}
-            <section className="mt-20 border-t border-line pt-12">
-              <h2 className="text-center text-[0.7rem] uppercase tracking-[0.4em] text-ink-soft">
-                On the Method
-              </h2>
-              <div className="mt-8 grid gap-10 text-center sm:grid-cols-3 sm:gap-6">
-                {FEATURES.map((f) => (
-                  <article key={f.numeral}>
-                    <div className="font-[family-name:var(--font-display)] text-2xl text-accent">
-                      {f.numeral}.
-                    </div>
-                    <h3 className="mt-2 font-[family-name:var(--font-display)] text-lg font-semibold">
-                      {f.title}
-                    </h3>
-                    <p className="mx-auto mt-2 max-w-xs text-[0.95rem] leading-relaxed text-ink-soft">
-                      {f.body}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </section>
-          </main>
-
-          {/* colophon */}
-          <footer className="mt-16 border-t-[3px] border-double border-line py-7 text-center">
-            <div aria-hidden className="text-accent">
-              ❧
-            </div>
-            <p className="mt-2 text-sm italic text-ink-soft">
-              Research demonstration — predictions are probabilistic and not
-              infallible. Do not use as sole evidence of misconduct.
-            </p>
-            <p className="mt-2 text-[0.7rem] uppercase tracking-[0.24em] text-ink-soft">
-              <a
-                href="https://huggingface.co/spaces/MohsinEli/pird-api"
-                className="transition-colors hover:text-accent-strong"
-              >
-                API
-              </a>
-              <span className="mx-3">·</span>
-              <a
-                href="https://github.com/MIHMahmudEli/Pird-ai-text-detector"
-                className="transition-colors hover:text-accent-strong"
-              >
-                Research
-              </a>
-            </p>
-          </footer>
-        </div>
+    <div className="mx-auto flex w-full max-w-5xl grow flex-col px-5 sm:px-8">
+      {/* dateline */}
+      <div className="flex items-center justify-between border-y border-line py-2 text-[0.64rem] uppercase tracking-[0.22em] text-ink-soft">
+        <span className="hidden sm:inline">Vol. I — MMXXVI</span>
+        <span className="flex items-center gap-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/seal.svg" alt="" className="h-4 w-4" />
+          Paraphrase-Robust Detection
+        </span>
+        <ThemeToggle />
       </div>
+
+      {/* masthead */}
+      <header className="pb-6 pt-9 text-center sm:pt-12">
+        <h1 className="font-[family-name:var(--font-display)] text-[4rem] font-bold leading-none tracking-[0.1em] sm:text-[5.2rem]">
+          <span className="pl-[0.1em]">PIRD</span>
+        </h1>
+        <p className="mt-3 text-[0.7rem] uppercase tracking-[0.34em] text-ink-soft">
+          The Textual Examiner
+        </p>
+        <p className="mx-auto mt-4 max-w-xl text-[1.1rem] italic leading-relaxed text-ink-soft">
+          Was it written by human hand, or by machine? Submit at least twenty
+          words and receive a calibrated verdict in plain language.
+        </p>
+      </header>
+
+      <div className="rule-double" />
+
+      {/* examiner */}
+      <main className="grow pt-8">
+        <Analyzer />
+
+        {/* method columns */}
+        <section className="mt-16 border-t border-line pt-10">
+          <h2 className="text-center text-[0.7rem] uppercase tracking-[0.36em] text-ink-soft">
+            On the Method
+          </h2>
+          <div className="mt-8 grid gap-8 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-line">
+            {FEATURES.map((f) => (
+              <article key={f.numeral} className="text-center sm:px-6">
+                <div className="font-[family-name:var(--font-display)] text-xl text-accent">
+                  {f.numeral}.
+                </div>
+                <h3 className="mt-1.5 font-[family-name:var(--font-display)] text-lg font-semibold">
+                  {f.title}
+                </h3>
+                <p className="mx-auto mt-2 max-w-xs text-[0.95rem] leading-relaxed text-ink-soft">
+                  {f.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      {/* colophon */}
+      <footer className="mt-14 border-t-[3px] border-double border-line py-6 text-center">
+        <div aria-hidden className="text-accent">
+          ❧
+        </div>
+        <p className="mt-2 text-sm italic text-ink-soft">
+          Research demonstration — predictions are probabilistic and not
+          infallible. Do not use as sole evidence of misconduct.
+        </p>
+        <p className="mt-2 text-[0.68rem] uppercase tracking-[0.22em] text-ink-soft">
+          <a
+            href="https://huggingface.co/spaces/MohsinEli/pird-api"
+            className="transition-colors hover:text-accent-strong"
+          >
+            API
+          </a>
+          <span className="mx-3">·</span>
+          <a
+            href="https://github.com/MIHMahmudEli/Pird-ai-text-detector"
+            className="transition-colors hover:text-accent-strong"
+          >
+            Research
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }
